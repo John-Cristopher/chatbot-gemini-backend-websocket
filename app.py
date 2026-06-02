@@ -29,7 +29,8 @@ app.secret_key = "ch@tb07"
 # Adiciona a funcionalidade de WebSockets (comunicação em tempo real) ao nosso app.
 # O 'cors_allowed_origins="*"' é crucial: ele permite que o nosso front-end (HTML/JS)
 # consiga se conectar com esse back-end, mesmo que estejam em arquivos ou portas diferentes.
-socketio = SocketIO(app, cors_allowed_origins="*")
+# O 'async_mode="threading"' evita conflitos com SSL e gevent que causam erros de SSLSocket.
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 # Dicionário que funciona como a "memória temporária" do servidor.
 # Ele guarda a conversa de cada aluno separadamente usando um ID único.
@@ -200,4 +201,4 @@ def handle_disconnect():
 
 # Inicia o servidor local. A porta padrão do Flask costuma ser a 5000.
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, debug=False, host="0.0.0.0", port=5000)

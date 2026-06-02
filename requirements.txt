@@ -4,6 +4,4 @@ flask-SocketIO
 google-genai
 python-dotenv
 gunicorn
-gevent
-gevent-websocket
 eventlet
