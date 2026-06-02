@@ -1,7 +1,9 @@
-flask
-flask-cors
-flask-SocketIO
-google-genai
-python-dotenv
-gunicorn
+flask==2.3.3
+flask-cors==4.0.0
+flask-SocketIO==5.3.4
+python-socketio==5.9.0
+python-engineio==4.7.1
+google-genai==0.3.0
+python-dotenv==1.0.0
+gunicorn==21.2.0
 eventlet
