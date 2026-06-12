@@ -133,7 +133,7 @@ def handle_enviar_mensagem(data):
             f"Mensagem [{modo_atual.upper()}] recebida de {session.get('session_id', request.sid)}: {mensagem_usuario}"
         )
 
-        if not mensaje_usuario:
+        if not mensagem_usuario:
             emit("erro", {"erro": "Mensagem não pode ser vazia."})
             return
 
