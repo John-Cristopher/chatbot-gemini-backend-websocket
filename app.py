@@ -1,3 +1,8 @@
+# O monkey_patch DEVE ser a primeira coisa absoluta no arquivo, antes de qualquer outro import.
+# Isso resolve os erros de "RuntimeError: Working outside of application context" nos logs.
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask, request, session, jsonify
 from flask_socketio import SocketIO, emit
 from google import genai
@@ -11,7 +16,7 @@ from config import SYSTEM_INSTRUCTION
 load_dotenv()
 
 # Define qual versão da IA vamos usar. O modelo "flash" é rápido e ideal para chatbots.
-MODELO = "gemini-3-flash-preview"
+MODELO = "gemini-1.5-flash"
 
 # Aqui definimos o "Prompt de Sistema". É a personalidade e as regras que o bot deve seguir.
 instrucoes = SYSTEM_INSTRUCTION
@@ -26,11 +31,6 @@ app = Flask(__name__)
 # e criptografar os dados da sessão (as "lembranças" de quem é quem).
 app.secret_key = "ch@tb07"
 
-# Adiciona a funcionalidade de WebSockets (comunicação em tempo real) ao nosso app.
-# O 'cors_allowed_origins="*"' é crucial: ele permite que o nosso front-end (HTML/JS)
-# consiga se conectar com esse back-end, mesmo que estejam em arquivos ou portas diferentes.
-# O 'async_mode="threading"' evita conflitos com SSL e gevent que causam erros de SSLSocket.
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 # Inicializa o SocketIO. Usamos 'eventlet' como async_mode para melhor performance
 # em produção e suporte total a WebSockets.
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
