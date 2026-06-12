@@ -31,6 +31,9 @@ app.secret_key = "ch@tb07"
 # consiga se conectar com esse back-end, mesmo que estejam em arquivos ou portas diferentes.
 # O 'async_mode="threading"' evita conflitos com SSL e gevent que causam erros de SSLSocket.
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
+# Inicializa o SocketIO. Usamos 'eventlet' como async_mode para melhor performance
+# em produção e suporte total a WebSockets.
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 
 # Dicionário que funciona como a "memória temporária" do servidor.
 # Ele guarda a conversa de cada aluno separadamente usando um ID único.
