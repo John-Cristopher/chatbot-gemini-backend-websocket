@@ -17,10 +17,10 @@ load_dotenv()
 
 # Modelos e Instruções por modo
 MODOS_CONFIG = {
-    "rapido": {"model": "gemini-1.5-flash", "instruction": INSTRUCAO_RAPIDA},
-    "detalhado": {"model": "gemini-1.5-flash", "instruction": INSTRUCAO_DETALHADA}
+    "rapido": {"model": "gemini-3-flash-preview", "instruction": INSTRUCAO_RAPIDA},
+    "detalhado": {"model": "gemini-3-flash-preview", "instruction": INSTRUCAO_DETALHADA}
 }
-MODELO_PADRAO = "gemini-1.5-flash"
+MODELO_PADRAO = "gemini-3-flash-preview"
 
 # Inicializa a conexão com a inteligência artificial do Google usando a chave da API
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
